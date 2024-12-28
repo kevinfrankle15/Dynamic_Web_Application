@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import productCount from "../Redux/Slicer";
+import userDetails from "../Redux/UserDetialSlicer.js";
 export const store = configureStore({
   reducer: {
-    addProduct: productCount,
+    userDetails: userDetails,
   },
 });
