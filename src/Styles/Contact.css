@@ -1,0 +1,41 @@
+.contactContainer{
+    /* border: 1px solid black;
+    width: 90vw;
+    height: 80vh;
+    position: absolute;
+    left: 5%;
+    top: 10% */
+    width: 90vw;
+    height: 80vh;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap:wrap
+}
+.formDiv{
+    height: 50vh;
+    width: 35vw;
+    transform: translateX(20px);
+    transition: 1.8s;
+    opacity:0;
+}
+.formDiv.showInput{
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+
+.contactPageBtn{
+    background-color:#353738 !important ;
+    color: white !important;
+    font-size: 18px !important;
+}
+.ContactHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 3%
+}

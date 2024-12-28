@@ -1,0 +1,12 @@
+.container{
+    border: 1px solid white;
+}
+.img-container{
+    width: 150px;
+    height: 50%;
+    border-radius: 50%;
+    border: 1px solid white;
+    /* display: inline; */
+    display: block;
+    height: 150px
+}

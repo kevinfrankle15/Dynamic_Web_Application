@@ -1,9 +1,11 @@
 .header{
-    border: 1px solid none;
-    background-color: #0073E6;
-    width: 100vw;
-    height: 15vh;
+    /* border: 1px solid none; */
+    /* border-bottom: 1px solid aliceblue; */
+    /* border-width: 5px; */
+    /* background-color: #0073E6; */
+    height: 10vh;
     color: aliceblue;
+    /* color: #F9F600; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,7 +16,6 @@
     width: 130px;
     border: none;
     background: none;
-    text-decoration: underline;
     font-size: large ;
     color: aliceblue;
 }

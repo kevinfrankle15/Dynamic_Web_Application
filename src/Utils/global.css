@@ -1,0 +1,54 @@
+body{
+margin: 0px;
+box-sizing: border-box;
+/* background: #ad5389;  
+background: -webkit-linear-gradient(to right, #ad5389, #3c1053);  
+background: linear-gradient(to right, #ad5389, #3c1053);  */
+background: #0f0c29;  
+background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  
+background: linear-gradient(to right, #24243e, #302b63, #0f0c29); 
+
+}
+.cursorPointer{
+    cursor: pointer;
+}
+.textBox{
+  border-radius: 5px;
+  width: 25%;
+}
+.requiredField{
+  color: #eb6767;
+  padding-right: 2%
+}
+.fontFamily{
+  font-family:Century;
+}
+.fontFamilyBtn{
+  font-family:Century;
+}
+.content-h{
+  color: #E6E6FA;
+  width: fit-content
+}
+.content{
+  color: #E6E6FA;
+  width: fit-content
+}
+.border-1{
+  border: 1px solid none;
+  /* border-radius: 25% 10%; */ 
+  border-radius: 50% 20% / 10% 40%;
+  background-color: #eb6767;
+}
+.responsive-font{
+    padding-bottom: 5%;
+}
+.forCaurosel{
+  display: flex;
+  align-items: center;
+  width: max-content;
+  /* background-color: #E6E6FA; */
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow-x: hidden;
+}
