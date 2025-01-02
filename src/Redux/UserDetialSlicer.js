@@ -20,7 +20,7 @@ const slice = createSlice({
       //   name: { $set: action.payload.name },
       // });
       var details = {
-        userId: action.payload,
+        id: action.payload,
       };
       localStorage.setItem("registered-user", JSON.stringify(details));
       return state.userDetail.push(details);

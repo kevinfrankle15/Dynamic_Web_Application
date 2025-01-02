@@ -17,8 +17,10 @@ const ProfilePage = () => {
   const [editble, setEditble] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
   const getUserInstance = async () => {
-    var userId = await JSON.parse(localStorage.getItem("registered-user"));
-    await AxiosInstance.get(`/view-users/${userId?.userId}/`)
+    var userId =
+      (await JSON.parse(localStorage.getItem("registered-user"))) ||
+      JSON.parse(localStorage.getItem("login"));
+    await AxiosInstance.get(`/view-users/${userId?.id}/`)
       .then((response) => {
         console.log(response?.data, "profile-page ");
         let { company_name, name, email, mobile_number, id } = response.data;
@@ -61,8 +63,10 @@ const ProfilePage = () => {
     if (getUserDetails.password !== getUserDetails.confirm_password) {
       console.log(updatedUserData, "updated user detials");
     }
-    var userId = JSON.parse(localStorage.getItem("registered-user"));
-    AxiosInstance.put(`/update-user/${userId?.userId}/`, updatedUserData)
+    var userId =
+      JSON.parse(localStorage.getItem("registered-user")) ||
+      JSON.parse(localStorage.getItem("login"));
+    AxiosInstance.put(`/update-user/${userId?.id}/`, updatedUserData)
       .then((response) => {
         console.log(response.data, "updated response");
         setHidePassword(false);
