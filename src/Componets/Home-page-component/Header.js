@@ -9,12 +9,12 @@ const Header = () => {
       <div className="header ">
         <p className="primary-fonts fontFamily">Commodity</p>
         <div>
-          <button
+          {/* <button
             className="signUpBtn cursorPointer fontFamilyBtn"
-            onClick={() => nav("/FreeTrialUser")}
+            onClick={() => nav("/Login")}
           >
-            SignIn
-          </button>
+            Log-In
+          </button> */}
           <button
             className="signUpBtn cursorPointer fontFamilyBtn"
             onClick={() => nav("/contact")}
