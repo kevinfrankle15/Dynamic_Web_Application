@@ -7,18 +7,18 @@ import Home from "./Componets/Home-page-component/Home";
 import ProfilePage from "./Componets/ProfilePage";
 // import PageNotFound from "./Componets/pageNotFound";
 import { BrowserRouter } from "react-router-dom";
-import Contact from "./Componets/Register";
-import FreeTrialUser from "./Componets/FreeTrialUserForm";
+import Contact from "./Componets/Contact";
+// import Register from "./Componets/Register";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<Login />} path="/login" />
+          {/* <Route element={<Login />} path="/login" /> */}
           <Route element={<SignUp />} path="/signup" />
           <Route element={<Home />} path="/*" />
           <Route element={<Contact />} path="/contact" />
-          <Route element={<FreeTrialUser />} path="/FreeTrialUser" />
+          {/* <Route element={<Register />} path="/register" /> */}
           {/* <Route element={<PageNotFound />} path="/*" /> */}
           <Route element={<ProtectedRoutes />}>
             <Route element={<ProfilePage />} path="/profile" />

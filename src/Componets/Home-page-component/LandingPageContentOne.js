@@ -8,8 +8,10 @@ import AxiosInstance from "../../Axios/Axios.js";
 import { symbols } from "../../Utils/formats.js";
 import { userDetials } from "../../Redux/UserDetialSlicer.js";
 import { useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
+import Login from "../Login.js";
 const LandingPageContent1 = () => {
+  const navigate = useNavigate();
   const [trialInputValues, setTrialInputValue] = useState({
     company_name: "",
     name: "",
@@ -17,9 +19,8 @@ const LandingPageContent1 = () => {
   const [mobileNumber, setMobileNumber] = useState({ mobile_no: "" });
   const [emailAddress, setEmailAddress] = useState({ email_address: "" });
   const [btnDisable, setBtnDisable] = useState(true);
-  const [response, setResponse] = useState(null);
+  const [res, setRes] = useState("");
   const dispatch = useDispatch();
-
   const dataObj = {
     company_name: trialInputValues.company_name,
     name: trialInputValues.name,
@@ -33,6 +34,7 @@ const LandingPageContent1 = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const userID = JSON.parse(localStorage.getItem("registered-user"));
   useEffect(() => {
     if (
       trialInputValues.company_name &&
@@ -61,8 +63,8 @@ const LandingPageContent1 = () => {
         console.log(trialInputValues, "response", mobileNumber, emailAddress);
         await AxiosInstance.post("post-user/", dataObj)
           .then((response) => {
-            setResponse(
-              response.data ? "Registered Succesfully" : "Try again later"
+            setRes(
+              response?.data ? "Registered Succesfully" : "Try again later"
             );
             setTrialInputValue({
               company_name: "",
@@ -71,16 +73,17 @@ const LandingPageContent1 = () => {
             setEmailAddress({ email_address: "" });
             setMobileNumber({ mobile_no: "" });
             setBtnDisable(true);
-            dispatch(userDetials(response.data.id));
+            dispatch(userDetials(response?.data.id));
+            navigate("/profile");
           })
           .catch((err) => {
-            setResponse(
-              err ? err.response.data.mobile_number : "Network Error"
+            setRes(
+              !err.message ? err.response?.data.mobile_number : err.message
             );
           });
       }
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
     }
   };
 
@@ -109,64 +112,83 @@ const LandingPageContent1 = () => {
               }}
               className="responsive-font"
             >
-              Register Your Company Here &#8623;
+              {!userID?.userId ? `Register Your Company Here` : "Login Here"}
+              &#8623;
             </h3>
 
             <div>
-              <form
-                onSubmit={(e) => submitResponse(e)}
-                className="form-container"
-              >
-                <label className="form-fields">
-                  Company Name:<span className="requiredField">*</span>
+              {!userID?.userId ? (
+                <form
+                  onSubmit={(e) => submitResponse(e)}
+                  className="form-container"
+                >
+                  <label className="form-fields">
+                    Company Name:<span className="requiredField">*</span>
+                    <input
+                      type="text"
+                      name="company_name"
+                      value={trialInputValues.company_name}
+                      onChange={handleFormInputs}
+                      className="textBox"
+                    />
+                  </label>
+                  <label className="form-fields">
+                    Name:<span className="requiredField">*</span>
+                    <input
+                      type="text"
+                      name="name"
+                      value={trialInputValues.name}
+                      onChange={handleFormInputs}
+                      className="textBox"
+                    />
+                  </label>
+                  <label className="form-fields">
+                    Mobile No:<span className="requiredField">*</span>
+                    <input
+                      type="text"
+                      name="mobile_no"
+                      value={mobileNumber.mobile_no}
+                      onChange={(e) => mobileNoInput(setMobileNumber, e)}
+                      className="textBox"
+                    />
+                  </label>
+                  <label className="form-fields">
+                    Email Address:<span className="requiredField">*</span>
+                    <input
+                      type="email"
+                      name="email_address"
+                      value={emailAddress.email_address}
+                      onChange={(e) => emailInput(setEmailAddress, e)}
+                      className="textBox"
+                    />
+                  </label>
                   <input
-                    type="text"
-                    name="company_name"
-                    value={trialInputValues.company_name}
-                    onChange={handleFormInputs}
-                    className="textBox"
+                    type="submit"
+                    value={"CREATE ACCOUNT"}
+                    disabled={btnDisable}
                   />
-                </label>
-                <label className="form-fields">
-                  Name:<span className="requiredField">*</span>
-                  <input
-                    type="text"
-                    name="name"
-                    value={trialInputValues.name}
-                    onChange={handleFormInputs}
-                    className="textBox"
-                  />
-                </label>
-                <label className="form-fields">
-                  Mobile No:<span className="requiredField">*</span>
-                  <input
-                    type="text"
-                    name="mobile_no"
-                    value={mobileNumber.mobile_no}
-                    onChange={(e) => mobileNoInput(setMobileNumber, e)}
-                    className="textBox"
-                  />
-                </label>
-                <label className="form-fields">
-                  Email Address:<span className="requiredField">*</span>
-                  <input
-                    type="email"
-                    name="email_address"
-                    value={emailAddress.email_address}
-                    onChange={(e) => emailInput(setEmailAddress, e)}
-                    className="textBox"
-                  />
-                </label>
-                <input
-                  type="submit"
-                  value={"CREATE ACCOUNT"}
-                  disabled={btnDisable}
-                />
-              </form>
+                </form>
+              ) : (
+                <Login />
+              )}
             </div>
+            {!userID?.userId ? (
+              <sapn
+                style={{
+                  textDecoration: "underline",
+                  color: "blue",
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate("/login")}
+              >
+                already have an account
+              </sapn>
+            ) : (
+              ""
+            )}
             <span>
-              {response == "Account Registered Succesfully" ? symbols.tick : ""}
-              {response}
+              {res == "Account Registered Succesfully" ? symbols.tick : ""}
+              {res}
             </span>
           </div>
         </div>
