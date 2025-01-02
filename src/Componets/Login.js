@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import svg from "../Images/erp (1).svg";
 import AxiosInstance from "../Axios/Axios";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     userNameOrEmail: "",
     password: "",
@@ -24,10 +26,12 @@ const Login = () => {
       if (inputValue.userNameOrEmail && inputValue.password) {
         AxiosInstance.post("login/", authData)
           .then((response) => {
-            console.log(response, "login response");
+            console.log(response.data);
+            localStorage.setItem("login", JSON.stringify(response.data[0]));
+            navigate("/admin");
           })
           .catch((err) => {
-            console.log(err.message);
+            console.log(err.response.data);
             setInputValue({ userNameOrEmail: "", password: "" });
           });
       } else {
@@ -86,6 +90,9 @@ const Login = () => {
           <Button
             style={{ background: "#EB6767", border: "none" }}
             onClick={(e) => handleSubmit(e)}
+            disabled={
+              inputValue.password && inputValue.userNameOrEmail ? false : true
+            }
           >
             Login
           </Button>

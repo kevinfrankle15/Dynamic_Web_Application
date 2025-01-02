@@ -1,10 +1,14 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 const ProtectedRoutes = () => {
-  var userDetail = JSON.parse(localStorage.getItem("registered-user"));
-  // const user = userDetail?.id;
-  const user = userDetail?.userId ? true : false;
+  const userDetailRegister = JSON.parse(
+    localStorage.getItem("registered-user")
+  );
+  const userDetailLogin = JSON.parse(localStorage.getItem("login"));
+  // const user = userDetailRegister?.id;
+  const userReg = userDetailRegister?.id ? true : false;
 
-  return user ? <Outlet /> : <Navigate to="/login" />;
+  const userLog = userDetailLogin?.id ? true : false;
+  return userReg || userLog ? <Outlet /> : <Navigate to="/" />;
 };
 export default ProtectedRoutes;
