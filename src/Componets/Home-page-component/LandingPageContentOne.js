@@ -14,7 +14,7 @@ const LandingPageContent1 = () => {
       <div className="row wrapper-Lft-Rgt-pane ">
         <div className="col-xs-12 col-sm-6 border-1 leftpane-LPC ">
           <h2 className="content-h responsive-font">
-            ERP Software for Manifacturing Companies
+            ERP Software for Manufacturing Companies
           </h2>
 
           <ul style={{ width: "100%", padding: "5%" }} className="forCaurosel">
@@ -35,8 +35,8 @@ const LandingPageContent1 = () => {
               className="responsive-font"
             >
               {switchComponent === "register"
-                ? `Register Your Company Here`
-                : "Login Here"}
+                ? `Register Your Company Here `
+                : "Login Here "}
               &#8623;
             </h3>
             <div>

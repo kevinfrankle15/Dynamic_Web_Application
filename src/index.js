@@ -7,10 +7,30 @@ import "./Utils/global.css";
 import { Provider } from "react-redux";
 import { store } from "./Redux/Store";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ThemeProvider, createTheme, colors } from "@mui/material";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const theme = createTheme({
+  cssVariables: true,
+  palette: {
+    primary: {
+      main: "#EB6767",
+    },
+    secondary: {
+      main: "#5EDFFF",
+    },
+    black: {
+      main: "#504F4E",
+    },
+    error: {
+      main: colors.red.A400,
+    },
+  },
+});
 root.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>
 );
 
