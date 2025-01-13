@@ -4,7 +4,12 @@ import { Form, Button } from "react-bootstrap";
 import svg from "../Images/erp (1).svg";
 import AxiosInstance from "../Axios/Axios";
 import { useNavigate } from "react-router-dom";
+import { Alertt } from "../Utils/Material-ui";
 const Login = () => {
+  const [fetchResponse, setFetchResponse] = useState({
+    code: "info",
+    message: "Checking",
+  });
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     userNameOrEmail: "",
@@ -26,13 +31,18 @@ const Login = () => {
       if (inputValue.userNameOrEmail && inputValue.password) {
         AxiosInstance.post("login/", authData)
           .then((response) => {
-            console.log(response.data);
-            localStorage.setItem("login", JSON.stringify(response.data[0]));
+            console.log(response?.data);
+            localStorage.setItem("login", JSON.stringify(response?.data[0]));
+            setFetchResponse({
+              code: response.status,
+              message: response.message,
+            });
             navigate("/admin");
           })
           .catch((err) => {
-            console.log(err.response.data);
+            console.log(err.response?.data);
             setInputValue({ userNameOrEmail: "", password: "" });
+            setFetchResponse({ code: err.status, message: err.message });
           });
       } else {
         setInputValue({ userNameOrEmail: "", password: "" });
@@ -60,6 +70,7 @@ const Login = () => {
           
           <input type="submit" />
         </form> */}
+        <Alertt prop={fetchResponse} />
         <Form>
           <Form.Group
             className="mb-3 col-sm-6 col-lg-6"

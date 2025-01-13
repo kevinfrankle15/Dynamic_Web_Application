@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AxiosInstance from "../Axios/Axios.js";
 import { mobileNoInput, emailInput } from "../Utils/reusableInputFields.js";
-
+import { Form, Button } from "react-bootstrap";
+import RegisterSng from "../Images/register.svg";
 const Register = () => {
   const navigate = useNavigate();
   const [trialInputValues, setTrialInputValue] = useState({
@@ -79,49 +80,113 @@ const Register = () => {
     }
   };
   return (
-    <form onSubmit={(e) => submitResponse(e)} className="form-container">
-      <label className="form-fields">
-        Company Name:<span className="requiredField">*</span>
-        <input
-          type="text"
-          name="company_name"
-          value={trialInputValues.company_name}
-          onChange={handleFormInputs}
-          className="textBox"
-        />
-      </label>
-      <label className="form-fields">
-        Name:<span className="requiredField">*</span>
-        <input
-          type="text"
-          name="name"
-          value={trialInputValues.name}
-          onChange={handleFormInputs}
-          className="textBox"
-        />
-      </label>
-      <label className="form-fields">
-        Mobile No:<span className="requiredField">*</span>
-        <input
-          type="text"
-          name="mobile_no"
-          value={mobileNumber.mobile_no}
-          onChange={(e) => mobileNoInput(setMobileNumber, e)}
-          className="textBox"
-        />
-      </label>
-      <label className="form-fields">
-        Email Address:<span className="requiredField">*</span>
-        <input
-          type="email"
-          name="email_address"
-          value={emailAddress.email_address}
-          onChange={(e) => emailInput(setEmailAddress, e)}
-          className="textBox"
-        />
-      </label>
-      <input type="submit" value={"CREATE ACCOUNT"} disabled={btnDisable} />
-    </form>
+    <>
+      <Form onSubmit={(e) => submitResponse(e)}>
+        <Form.Group
+          className="mb-3 col-sm-6 col-lg-6"
+          controlId="formGroupEmail"
+        >
+          <Form.Control
+            type="text"
+            placeholder="Company Name"
+            name="company_name"
+            value={trialInputValues.company_name}
+            onChange={handleFormInputs}
+          />
+        </Form.Group>
+        <Form.Group
+          className="mb-3 col-sm-6 col-lg-6"
+          controlId="formGroupEmail"
+        >
+          <Form.Control
+            placeholder="Username"
+            type="text"
+            name="name"
+            value={trialInputValues.name}
+            onChange={handleFormInputs}
+          />
+        </Form.Group>
+        <Form.Group
+          className="mb-3 col-sm-6 col-lg-6"
+          controlId="formGroupEmail"
+        >
+          <Form.Control
+            placeholder="Mobile No"
+            type="text"
+            name="mobile_no"
+            value={mobileNumber.mobile_no}
+            onChange={(e) => mobileNoInput(setMobileNumber, e)}
+          />
+        </Form.Group>
+        <Form.Group
+          className="mb-3 col-sm-6 col-lg-6"
+          controlId="formGroupEmail"
+        >
+          <Form.Control
+            placeholder="Email"
+            type="email"
+            name="email_address"
+            value={emailAddress.email_address}
+            onChange={(e) => emailInput(setEmailAddress, e)}
+          />
+        </Form.Group>
+        <Button
+          type="submit"
+          style={{ background: "#EB6767", border: "none" }}
+          disabled={btnDisable}
+        >
+          Register
+        </Button>
+      </Form>
+      <img
+        src={RegisterSng}
+        alt="svg"
+        style={{ width: "30%", float: "inline-end" }}
+      />
+    </>
+    // <form onSubmit={(e) => submitResponse(e)} className="form-container">
+    //   <label className="form-fields">
+    //     Company Name:<span className="requiredField">*</span>
+    //     <input
+    //       type="text"
+    //       name="company_name"
+    //       value={trialInputValues.company_name}
+    //       onChange={handleFormInputs}
+    //       className="textBox"
+    //     />
+    //   </label>
+    //   <label className="form-fields">
+    //     Name:<span className="requiredField">*</span>
+    //     <input
+    //       type="text"
+    //       name="name"
+    //       value={trialInputValues.name}
+    //       onChange={handleFormInputs}
+    //       className="textBox"
+    //     />
+    //   </label>
+    //   <label className="form-fields">
+    //     Mobile No:<span className="requiredField">*</span>
+    //     <input
+    //       type="text"
+    //       name="mobile_no"
+    //       value={mobileNumber.mobile_no}
+    //       onChange={(e) => mobileNoInput(setMobileNumber, e)}
+    //       className="textBox"
+    //     />
+    //   </label>
+    //   <label className="form-fields">
+    //     Email Address:<span className="requiredField">*</span>
+    //     <input
+    //       type="email"
+    //       name="email_address"
+    //       value={emailAddress.email_address}
+    //       onChange={(e) => emailInput(setEmailAddress, e)}
+    //       className="textBox"
+    //     />
+    //   </label>
+    //   <input type="submit" value={"CREATE ACCOUNT"} disabled={btnDisable} />
+    // </form>
   );
 };
 

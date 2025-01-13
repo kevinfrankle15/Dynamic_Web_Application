@@ -4,10 +4,10 @@ box-sizing: border-box;
 /* background: #ad5389;  
 background: -webkit-linear-gradient(to right, #ad5389, #3c1053);  
 background: linear-gradient(to right, #ad5389, #3c1053);  */
-background: #0f0c29;  
+/* background: #0f0c29;  
 background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  
-background: linear-gradient(to right, #24243e, #302b63, #0f0c29); 
-
+background: linear-gradient(to right, #24243e, #302b63, #0f0c29);  */
+background: linear-gradient(125deg, #ECFCFF 0%, #ECFCFF 40%, #B2FCFF calc(40% + 1px), #B2FCFF 60%, #5EDFFF calc(60% + 1px), #5EDFFF 72%, #EB6767  calc(72% + 1px), #EB6767 100%);
 }
 .cursorPointer{
     cursor: pointer;
