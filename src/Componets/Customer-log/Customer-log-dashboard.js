@@ -18,8 +18,8 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
 import { Stack, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { ConfirmDialog } from "@toolpad/core";
@@ -311,6 +311,7 @@ function EnhancedTableToolbar(props) {
         </Typography>
       )}
       <ToolbarActionsSearch />
+      <RefreshRoundedIcon style={{ cursor: "pointer", color: "gray" }} />
 
       {/* {numSelected > 0 ? ( */}
       <Tooltip title="Delete">

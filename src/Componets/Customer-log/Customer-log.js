@@ -1,26 +1,3 @@
-// import React from "react";
-// import {
-//   colors,
-//   CssBaseline,
-//   ThemeProvider,
-//   Typography,
-//   Container,
-//   createTheme,
-//   Box,
-//   SvgIcon,
-//   Link,
-// } from "@mui/material";
-
-// const CustomerLog = () => {
-//   return (
-//     <>
-//       <Container>
-//         <Typography sx={{ height: "100vh" }}></Typography>
-//       </Container>
-//     </>
-//   );
-// };
-// export default CustomerLog;
 import * as React from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
@@ -31,7 +8,6 @@ import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { createTheme } from "@mui/material/styles";
-// import CloudCircleIcon from "@mui/icons-material/CloudCircle";
 import RememberMeTwoToneIcon from "@mui/icons-material/RememberMeTwoTone";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -44,6 +20,15 @@ import profile from "../../Images/profile.png";
 import { useNavigate } from "react-router-dom";
 import EnhancedTable from "./Customer-log-dashboard";
 import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
+import PersonIcon from "@mui/icons-material/Person";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import SettingsIcon from "@mui/icons-material/Settings";
+import InvioceTab from "../Invoice/Invoice-page";
+import DashboardLayoutBasic from "../Dashboard/Dashboard";
+import PaymentHistory from "../Payment/Payment-history-module";
+import QuoteDataTable from "../Quotes/Data-table-Quote";
 const NAVIGATION = [
   {
     kind: "header",
@@ -55,9 +40,34 @@ const NAVIGATION = [
     icon: <DashboardIcon />,
   },
   {
+    segment: "clients",
+    title: "Clients",
+    icon: <PersonIcon />,
+  },
+  {
+    segment: "quotes",
+    title: "Quotes",
+    icon: <RequestQuoteIcon />,
+  },
+  {
+    segment: "invoice",
+    title: "Invoice",
+    icon: <ReceiptLongIcon />,
+  },
+  {
+    segment: "payment",
+    title: "Payment",
+    icon: <CurrencyRupeeIcon />,
+  },
+  {
     segment: "products",
     title: "Products",
     icon: <ShoppingCartIcon />,
+  },
+  {
+    segment: "settings",
+    title: "Settings",
+    icon: <SettingsIcon />,
   },
 ];
 
@@ -85,7 +95,15 @@ function DemoPageContent({ pathname }) {
   const componentSwitch = (routerPath) => {
     switch (routerPath) {
       case "/dashboard":
+        return <DashboardLayoutBasic />;
+      case "/clients":
         return <EnhancedTable />;
+      case "/quotes":
+        return <QuoteDataTable />;
+      case "/invoice":
+        return <InvioceTab />;
+      case "/payment":
+        return <PaymentHistory />;
       case "/products":
         return "products";
       case "/display":
@@ -120,41 +138,41 @@ DemoPageContent.propTypes = {
   pathname: PropTypes.string.isRequired,
 };
 
-function ToolbarActionsSearch() {
-  return (
-    <Stack direction="row">
-      <Tooltip title="Search" enterDelay={1000}>
-        <div>
-          <IconButton
-            type="button"
-            aria-label="search"
-            sx={{
-              display: { xs: "inline", md: "none" },
-            }}
-          >
-            <SearchIcon />
-          </IconButton>
-        </div>
-      </Tooltip>
-      <TextField
-        label="Search"
-        variant="outlined"
-        size="small"
-        slotProps={{
-          input: {
-            endAdornment: (
-              <IconButton type="button" aria-label="search" size="small">
-                <SearchIcon />
-              </IconButton>
-            ),
-            sx: { pr: 0.5 },
-          },
-        }}
-        sx={{ display: { xs: "none", md: "inline-block" }, mr: 1 }}
-      />
-    </Stack>
-  );
-}
+// function ToolbarActionsSearch() {
+//   return (
+//     <Stack direction="row">
+//       <Tooltip title="Search" enterDelay={1000}>
+//         <div>
+//           <IconButton
+//             type="button"
+//             aria-label="search"
+//             sx={{
+//               display: { xs: "inline", md: "none" },
+//             }}
+//           >
+//             <SearchIcon />
+//           </IconButton>
+//         </div>
+//       </Tooltip>
+//       <TextField
+//         label="Search"
+//         variant="outlined"
+//         size="small"
+//         slotProps={{
+//           input: {
+//             endAdornment: (
+//               <IconButton type="button" aria-label="search" size="small">
+//                 <SearchIcon />
+//               </IconButton>
+//             ),
+//             sx: { pr: 0.5 },
+//           },
+//         }}
+//         sx={{ display: { xs: "none", md: "inline-block" }, mr: 1 }}
+//       />
+//     </Stack>
+//   );
+// }
 
 function SidebarFooter({ mini }) {
   console.log(mini, "mini");
@@ -187,7 +205,7 @@ function CustomAppTitle() {
 
 function CustomerLogAdmin(props) {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("login"));
+  const userData = JSON.parse(localStorage.getItem("admin"));
   // const { window } = props;
   const [session, setSession] = React.useState({
     user: {
@@ -210,7 +228,7 @@ function CustomerLogAdmin(props) {
       },
       signOut: () => {
         setSession(null);
-        localStorage.removeItem("login");
+        localStorage.removeItem("admin");
         navigate("/");
       },
     };

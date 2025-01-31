@@ -35,14 +35,19 @@ const Login = () => {
             localStorage.setItem("login", JSON.stringify(response?.data[0]));
             setFetchResponse({
               code: response.status,
-              message: response.message,
+              message: response.message || "Login Successful",
             });
-            navigate("/admin");
+            setTimeout(() => navigate("/profile"), 2000);
           })
           .catch((err) => {
             console.log(err.response?.data);
             setInputValue({ userNameOrEmail: "", password: "" });
-            setFetchResponse({ code: err.status, message: err.message });
+            setFetchResponse({
+              code: err.status,
+              message: err.response?.data
+                ? err.response?.data
+                : "Network Error",
+            });
           });
       } else {
         setInputValue({ userNameOrEmail: "", password: "" });
