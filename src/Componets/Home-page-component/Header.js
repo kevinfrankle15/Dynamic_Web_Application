@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../Styles/Home.css";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 const Header = () => {
+  const [state, setState] = useState(true);
   const nav = useNavigate();
+  const isLoggedIn = localStorage.getItem(
+    "login" || "admin" || "registered-user"
+  );
+  useEffect(() => {
+    if (isLoggedIn) {
+      setState(true);
+    } else {
+      setState(false);
+    }
+  }, [isLoggedIn]);
   const logout = () => {
     localStorage.removeItem("login");
     localStorage.removeItem("registered-user");
+    localStorage.removeItem("admin");
+    setState(false);
   };
   return (
     <>
@@ -28,13 +41,15 @@ const Header = () => {
           Commodity
         </Typography>
         <div>
-          <button
-            className="signUpBtn cursorPointer fontFamilyBtn"
-            onClick={() => logout()}
-            style={{ color: "#504F4E" }}
-          >
-            LogOut
-          </button>
+          {state ? (
+            <button
+              className="signUpBtn cursorPointer fontFamilyBtn"
+              onClick={() => logout()}
+              style={{ color: "#504F4E" }}
+            >
+              LogOut
+            </button>
+          ) : null}
           <button
             className="signUpBtn cursorPointer fontFamilyBtn"
             onClick={() => nav("/contact")}

@@ -2,12 +2,20 @@ import React, { useState } from "react";
 import "../../Styles/Home.css";
 import { defaultJson } from "../../Utils/DefaultInputsJson.js";
 import "../../Styles/Home-page/LPContentOne.css";
+import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 // import { useMediaQuery } from "react-responsive";
 
 import Login from "../Login.js";
 import Register from "../Register.js";
 const LandingPageContent1 = () => {
   const [switchComponent, setSwitchComponent] = useState("register");
+  // function generate(element) {
+  //   return [0, 1, 2].map((value) =>
+  //     React.cloneElement(element, {
+  //       key: value,
+  //     })
+  //   );
+  // }
 
   return (
     <div className="container-fluid ">
@@ -17,13 +25,16 @@ const LandingPageContent1 = () => {
             ERP Software for Manufacturing Companies
           </h2>
 
-          <ul style={{ width: "100%", padding: "5%" }} className="forCaurosel">
+          <ul style={{ width: "100%", padding: "5%", listStyleType: "none" }}>
+            {" "}
+            {/*className="forCaurosel"*/}
             {defaultJson.ourServices?.map((item, id) => (
               <li key={id} className="content">
-                {item}
+                <CheckCircleOutlineRoundedIcon /> {item}
               </li>
             ))}
           </ul>
+
           <div></div>
         </div>
         <div className="col-xs-6 col-sm-5 col rightpane-LPC ">

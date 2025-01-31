@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
-const ProtectedRoutes = () => {
+export const ProtectedRoutes = () => {
   const userDetailRegister = JSON.parse(
     localStorage.getItem("registered-user")
   );
@@ -11,4 +11,8 @@ const ProtectedRoutes = () => {
   const userLog = userDetailLogin?.id ? true : false;
   return userReg || userLog ? <Outlet /> : <Navigate to="/" />;
 };
-export default ProtectedRoutes;
+export const ProtectedRoutesAdmin = () => {
+  const admin = true;
+  return admin ? <Outlet /> : <Navigate to="/" />;
+};
+// export default ProtectedRoutes;
