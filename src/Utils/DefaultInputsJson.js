@@ -14,49 +14,28 @@ export const defaultJson = {
 export const DataTableObj = {
   rows: [
     {
-      id: 0,
-      invoiceNo: "Avatar",
-      clientName: "James Cameron",
-      company: "20th Century Fox",
-      totalAmount: 237000000,
-      date: 2009,
-    },
-  ],
-
-  columns: [
-    {
-      field: "invoiceNo",
-      headerName: "Invoice No",
-      width: 200,
-      groupable: false,
+      id: "1",
+      invoiceNo: "1",
+      clientName: "default",
+      company: "default",
+      date: "2025-01-24",
+      totalAmount: "1245",
     },
     {
-      field: "clientName",
-      headerName: "Client Name",
-      width: 200,
+      id: "2",
+      invoiceNo: "2",
+      clientName: "default",
+      company: "default",
+      date: "2025-01-24",
+      totalAmount: "1245",
     },
     {
-      field: "company",
-      headerName: "Company",
-      width: 200,
-    },
-    {
-      field: "date",
-      headerName: "Date",
-      type: "number",
-      availableAggregationFunctions: ["max", "min"],
-    },
-    {
-      field: "totalAmount",
-      headerName: "Total Amount",
-      type: "number",
-      width: 150,
-      groupable: false,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 220,
+      id: "3",
+      invoiceNo: "3",
+      clientName: "default",
+      company: "default",
+      date: "2025-01-24",
+      totalAmount: "1245",
     },
   ],
 };

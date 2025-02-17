@@ -7,28 +7,74 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function FormDialog({ prop, getInvoices }) {
+export default function FormDialog({
+  state,
+  prop,
+  getInvoices,
+  editInvoice,
+  setState,
+  rowData,
+  deleteInvoice,
+}) {
   let { buttonName } = prop;
-
+  const [invoice, setInvoice] = React.useState({
+    id: "",
+    invoiceNo: "",
+    clientName: "",
+    company: "",
+    date: "",
+    totalAmount: "",
+  });
   const [open, setOpen] = React.useState(false);
+
   React.useEffect(() => {});
   const handleClickOpen = () => {
     setOpen(true);
   };
+  React.useEffect(() => {
+    setOpen(state);
+  }, [state, prop]);
 
   const handleClose = () => {
     setOpen(false);
+    setState(false);
   };
   const handleSubmit = (d) => {
-    getInvoices(JSON.stringify(d));
+    getInvoices(JSON.stringify(invoice));
   };
-
+  const handleEdit = () => {
+    editInvoice(JSON.stringify(invoice));
+  };
+  const handleDelete = (e) => {
+    deleteInvoice(JSON.stringify(invoice));
+  };
+  React.useEffect(() => {
+    if (rowData) {
+      const { row } = rowData;
+      const { id, invoiceNo, clientName, company, date, totalAmount } = row;
+      setInvoice({
+        id: id,
+        invoiceNo: invoiceNo,
+        clientName: clientName,
+        company: company,
+        date: date,
+        totalAmount: totalAmount,
+      });
+    }
+  }, [setState]);
+  const handleChange = (e) => {
+    setInvoice((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
   return (
     <React.Fragment>
       <Button
         variant="contained"
         onClick={handleClickOpen}
-        sx={{ backgroundColor: "white", color: "#EB6767" }}
+        sx={{
+          backgroundColor: "white",
+          color: "#EB6767",
+          display: !state ? "block" : "none",
+        }}
       >
         {buttonName}
       </Button>
@@ -39,11 +85,10 @@ export default function FormDialog({ prop, getInvoices }) {
           component: "form",
           onSubmit: (event) => {
             event.preventDefault();
-            console.log(event.currentTarget);
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
             const data = formJson;
-            handleSubmit(data);
+            // handleSubmit(data);
             handleClose();
           },
         }}
@@ -61,7 +106,8 @@ export default function FormDialog({ prop, getInvoices }) {
             type="number"
             fullWidth
             variant="standard"
-            // onChange={handleChange}
+            onChange={handleChange}
+            value={invoice.id}
           />
           <TextField
             autoFocus
@@ -73,7 +119,8 @@ export default function FormDialog({ prop, getInvoices }) {
             type="number"
             fullWidth
             variant="standard"
-            // onChange={handleChange}
+            onChange={handleChange}
+            value={invoice.invoiceNo}
           />
           <TextField
             autoFocus
@@ -85,7 +132,8 @@ export default function FormDialog({ prop, getInvoices }) {
             type="text"
             fullWidth
             variant="standard"
-            // onChange={handleChange}
+            onChange={handleChange}
+            value={invoice.clientName}
           />
           <TextField
             autoFocus
@@ -97,7 +145,8 @@ export default function FormDialog({ prop, getInvoices }) {
             type="text"
             fullWidth
             variant="standard"
-            // onChange={handleChange}
+            onChange={handleChange}
+            value={invoice.company}
           />
           <TextField
             autoFocus
@@ -109,7 +158,8 @@ export default function FormDialog({ prop, getInvoices }) {
             type="Date"
             fullWidth
             variant="standard"
-            // onChange={handleChange}
+            onChange={handleChange}
+            value={invoice.date}
           />
           <TextField
             autoFocus
@@ -121,13 +171,26 @@ export default function FormDialog({ prop, getInvoices }) {
             type="number"
             fullWidth
             variant="standard"
-            // onChange={handleChange}
+            onChange={handleChange}
+            value={invoice.totalAmount}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Add</Button>
-        </DialogActions>
+        {!rowData ? (
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit" onClick={handleSubmit}>
+              Add
+            </Button>
+          </DialogActions>
+        ) : (
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleEdit}>Edit</Button>
+            <Button type="submit" onClick={(e) => handleDelete(e)}>
+              Delete
+            </Button>
+          </DialogActions>
+        )}
       </Dialog>
     </React.Fragment>
   );
